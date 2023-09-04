@@ -1,7 +1,28 @@
+"use client";
+import { useRouter } from "next/navigation";
+
 const NewPage = () => {
+  const router = useRouter();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const title = e.target.title.value;
+    const description = e.target.description.value;
+    const res = await fetch("/api/tasks", {
+      method: "POST",
+      body: JSON.stringify({ title, description }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    e.target.title.value = "";
+    e.target.description.value = "";
+    router.push("/");
+  };
   return (
     <div className="h-screen flex justify-center items-center">
-      <form className="bg-slate-800 p-10 w-1/4">
+      <form className="bg-slate-800 p-10 w-1/4" onSubmit={handleSubmit}>
         <h1 className="py-2 text-2xl text-bold">Formulario de tareas</h1>
         <label htmlFor="title" className="font-bold text-sm">
           Titulo de la tarea
