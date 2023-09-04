@@ -1,6 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
 
+//en general no hay mucha diferencia con usar react, solo la implementación de "use client" ya que estamos agregando interactividad
+
 const NewPage = () => {
   const router = useRouter();
 
@@ -8,6 +10,9 @@ const NewPage = () => {
     e.preventDefault();
     const title = e.target.title.value;
     const description = e.target.description.value;
+
+    //aquí llamamos a la API que creamos para crear nuevas tareas ("/api/tasks"). Atento a la forma en que se debe construir la funcion FETCH. En la parte "headers", indicamos al servidor el tipo de dato que estamos enviando.
+    //Que en este caso es un json (https://developer.mozilla.org/es/docs/Web/HTTP/Headers/Content-Type)
     const res = await fetch("/api/tasks", {
       method: "POST",
       body: JSON.stringify({ title, description }),
@@ -15,7 +20,7 @@ const NewPage = () => {
         "Content-Type": "application/json",
       },
     });
-    const data = await res.json();
+    await res.json();
     e.target.title.value = "";
     e.target.description.value = "";
     router.push("/");
