@@ -16,9 +16,7 @@ export async function PUT(request, { params }) {
     where: {
       id: Number(params.id),
     },
-    data: {
-      data: data,
-    },
+    data: data,
   });
   return NextResponse.json(taskUpdated);
 }
