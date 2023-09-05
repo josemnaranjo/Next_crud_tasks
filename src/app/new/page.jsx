@@ -73,9 +73,26 @@ const NewPage = ({ params }) => {
           onChange={(e) => setDescription(e.target.value)}
           value={description}
         ></textarea>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          type="submit"
+        >
           Crear
         </button>
+        {params.id && (
+          <button
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-3"
+            type="button"
+            onClick={async () => {
+              await fetch(`/api/${params.id}`, { method: "DELETE" });
+              router.refresh();
+              router.push("/");
+            }}
+          >
+            {" "}
+            Delete
+          </button>
+        )}
       </form>
     </div>
   );
