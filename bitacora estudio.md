@@ -2,4 +2,4 @@
 
 link youtube: https://www.youtube.com/watch?v=_SPoSMmN3ZU
 
-siguiente sesion: formulario (3:42:15)
+siguiente sesion: navbar (4:29:29)
